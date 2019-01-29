@@ -587,23 +587,35 @@ create index concurrently idx_ad_treenodemm_node on  ad_treenodemm (node_id);
 
 
 -- script 7
-CREATE INDEX CONCURRENTLY idx_ad_wf_activity_ecord_processed_ad_wf_activity ON ad_wf_activity (record_id,AD_Table_ID,processed);
-
-
-create index concurrently idx_c_invoice_createdby_AD_Org_ad_client   	  on c_invoice (createdby,AD_Org_ID,ad_client_id);
-create index concurrently idx_c_payment_createdby_AD_Org_ad_client   	  on c_payment (createdby,AD_Org_ID,ad_client_id);
-create index concurrently idx_m_inout_createdby_AD_Org_ad_client     	  on m_inout (createdby,AD_Org_ID,ad_client_id);
-create index concurrently idx_m_inventory_createdby_AD_Org_ad_client      on m_inventory (createdby,AD_Org_ID,ad_client_id);
-create index concurrently idx_m_movement_createdby_AD_Org_ad_client  	  on m_movement (createdby,AD_Org_ID,ad_client_id);
-create index concurrently idx_c_allocationhdr_createdby_AD_Org_ad_client  on c_allocationhdr (createdby,AD_Org_ID,ad_client_id);
-create index concurrently idx_c_order_createdby_AD_Org_ad_client  		  on c_order (createdby,AD_Org_ID,ad_client_id);
-create index concurrently idx_c_bankstatement_createdby_AD_Org_ad_client  on c_bankstatement (createdby,AD_Org_ID,ad_client_id);
+CREATE INDEX CONCURRENTLY idx_ad_wf_activity_ecord_processed_ad_wf_activity ON brerp.ad_wf_activity (record_id,AD_Table_ID,processed);
+create index concurrently idx_c_invoice_createdby_AD_Org_ad_client   	  on brerp.c_invoice (createdby,AD_Org_ID,ad_client_id);
+create index concurrently idx_c_payment_createdby_AD_Org_ad_client   	  on brerp.c_payment (createdby,AD_Org_ID,ad_client_id);
+create index concurrently idx_m_inout_createdby_AD_Org_ad_client     	  on brerp.m_inout (createdby,AD_Org_ID,ad_client_id);
+create index concurrently idx_m_inventory_createdby_AD_Org_ad_client      on brerp.m_inventory (createdby,AD_Org_ID,ad_client_id);
+create index concurrently idx_m_movement_createdby_AD_Org_ad_client  	  on brerp.m_movement (createdby,AD_Org_ID,ad_client_id);
+create index concurrently idx_c_allocationhdr_createdby_AD_Org_ad_client  on brerp.c_allocationhdr (createdby,AD_Org_ID,ad_client_id);
+create index concurrently idx_c_order_createdby_AD_Org_ad_client  		  on brerp.c_order (createdby,AD_Org_ID,ad_client_id);
+create index concurrently idx_c_bankstatement_createdby_AD_Org_ad_client  on brerp.c_bankstatement (createdby,AD_Org_ID,ad_client_id);
 CREATE UNIQUE INDEX ad_preference_uu_idx ON brerp.ad_preference USING btree (ad_preference_uu) ;
 create index  idx_t_inventorytrxsummary_ad_pinstance_id on brerp.t_inventorytrxsummary  (ad_pinstance_id);
 create index  idx_t_inventorytrxsummary_m_product_id on brerp.t_inventorytrxsummary  (m_product_id);
 create index  idx_t_inventorytrxsummary_productvalue on brerp.t_inventorytrxsummary  (productvalue);
 create index  idx_t_inventorytrxsummary_m_product_category_id on brerp.t_inventorytrxsummary  (m_product_category_id);
 create index  idx_t_inventorytrxsummary_m_product_m_warehouse_id on brerp.t_inventorytrxsummary  (m_warehouse_id);
+create index idx_c_doctype_DocBaseType_lbr_HasOpenItems_ad_org_id_ad_client_id on brerp.c_doctype (docbasetype,lbr_HasOpenItems,AD_Org_ID,AD_Client_ID);
+create index idx_c_invoice_ad_org_ad_client on brerp.c_invoice (AD_Org_ID,AD_Client_ID);
+create index c_invoice_ad_org_ad_client_dateinvoiced on brerp.c_invoice (AD_Org_ID,AD_Client_ID,dateinvoiced);
+create index idx_t_selection_ad_pinstance_id on brerp.t_selection (ad_pinstance_id);
+create index idx_lbr_docfiscal_line_m_inoutline_id on brerp.lbr_docfiscal_line (M_InOutLine_ID); 
+create index idx_m_movementlineconfirm_Processed on brerp.m_movementlineconfirm (Processed);
+create index idx_m_productprice_M_Product_ID_M_PriceList_Version_ID on brerp.m_productprice (M_Product_ID,m_pricelist_version_id);
+create index idx_lbr_docfiscal_ad_org_id_ad_client_id_ide_dhEmi_ide_tpnf  on brerp.lbr_docfiscal (ad_org_id,ad_client_id,ide_dhEmi,ide_tpnf);
+create index idx_c_invoice_ad_client_id_ad_org_id  on brerp.c_invoice (ad_client_id,ad_org_id );
+create index idx_lbr_ide_dhEmi_AD_Org_ID_AD_Client_ID_de_tpNF_ide_finnfe  on brerp.lbr_docfiscal (ide_dhEmi,AD_Org_ID,AD_Client_ID,ide_tpNF,ide_finnfe);
+create index idx_cof_label_valeu on brerp.cof_label (value);
+create index idx_c_invoice_user2_id on brerp.c_invoice (user2_id);
+create index idx_m_productionline_m_product_id_movementqty_processed on brerp.M_ProductionLine (M_Product_ID,MovementQty,Processed);
+create index idx_z_manifestoline_z_manifesto_id on brerp.z_manifestoline (z_manifesto_ID);	
 
 -- mht daqui pra baixo tem que ser analisada a query
 SELECT pg_size_pretty(SUM(pg_relation_size(idx))::BIGINT) AS SIZE,
@@ -622,8 +634,9 @@ drop index m_costdetail_il;
 drop index idx_lbr_docfiscal_line_m_inoutline_id;
 drop index udi_inoutline_docfiscalline;
 drop index c_bplocation_bpartner;
-
+drop index idx_ad_preference_ad_preference_uu;
 drop index ad_table_name;
 drop index c_commissionamt_run;
 drop index c_currency_c_currency_id_idx;
 drop index idx_lbr_docfiscal_lbr_docfiscal_uu;
+drop index idx_m_productionline_m_product_id;
