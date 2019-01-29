@@ -598,7 +598,12 @@ create index concurrently idx_m_movement_createdby_AD_Org_ad_client  	  on m_mov
 create index concurrently idx_c_allocationhdr_createdby_AD_Org_ad_client  on c_allocationhdr (createdby,AD_Org_ID,ad_client_id);
 create index concurrently idx_c_order_createdby_AD_Org_ad_client  		  on c_order (createdby,AD_Org_ID,ad_client_id);
 create index concurrently idx_c_bankstatement_createdby_AD_Org_ad_client  on c_bankstatement (createdby,AD_Org_ID,ad_client_id);
-
+CREATE UNIQUE INDEX ad_preference_uu_idx ON brerp.ad_preference USING btree (ad_preference_uu) ;
+create index  idx_t_inventorytrxsummary_ad_pinstance_id on brerp.t_inventorytrxsummary  (ad_pinstance_id);
+create index  idx_t_inventorytrxsummary_m_product_id on brerp.t_inventorytrxsummary  (m_product_id);
+create index  idx_t_inventorytrxsummary_productvalue on brerp.t_inventorytrxsummary  (productvalue);
+create index  idx_t_inventorytrxsummary_m_product_category_id on brerp.t_inventorytrxsummary  (m_product_category_id);
+create index  idx_t_inventorytrxsummary_m_product_m_warehouse_id on brerp.t_inventorytrxsummary  (m_warehouse_id);
 
 -- mht daqui pra baixo tem que ser analisada a query
 SELECT pg_size_pretty(SUM(pg_relation_size(idx))::BIGINT) AS SIZE,
@@ -611,23 +616,13 @@ FROM (
 GROUP BY KEY HAVING COUNT(*)>1
 ORDER BY SUM(pg_relation_size(idx)) DESC;
 
--- identificados os duplicados
-size	idx1	idx2	idx3	idx4
-27 MB	lbr_docfiscal_uu_idx	idx_lbr_docfiscal_lbr_docfiscal_uu	[NULL]	[NULL]
-21 MB	udi_inoutline_docfiscalline	idx_lbr_docfiscal_line_m_inoutline_id	[NULL]	[NULL]
-2496 kB	c_bplocation_bpartner	idx_c_bpartner_c_bpartner_id	[NULL]	[NULL]
-528 kB	ad_preference_uu_idx	idx_ad_preference_ad_preference_uu	[NULL]	[NULL]
-128 kB	ad_table_name	idx_ad_table_tablename	[NULL]	[NULL]
-80 kB	c_commissionamt_run	idx_c_commissionamt_c_commissionrun_id	[NULL]	[NULL]
-32 kB	c_currency_pkey	c_currency_c_currency_id_idx	[NULL]	[NULL]
- 
 
 -- eleger algum para excluir 
 drop index m_costdetail_il;
 drop index idx_lbr_docfiscal_line_m_inoutline_id;
 drop index udi_inoutline_docfiscalline;
 drop index c_bplocation_bpartner;
-drop index ad_preference_uu_idx;
+
 drop index ad_table_name;
 drop index c_commissionamt_run;
 drop index c_currency_c_currency_id_idx;
