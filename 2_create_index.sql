@@ -1,24 +1,4 @@
 
---Duplicidade tabela brerp.c_channel
-drop index CONCURRENTLY brerp.c_channel_key;
---Duplicidade tabela brerp.c_paymentprocessor
-drop index concurrently brerp.c_paymentprocessor_key;
---Duplicidade tabela brerp.c_invoice
-drop index concurrently brerp.c_invoice_key;
---Duplicidade tabela brerp.c_tax
-drop index concurrently brerp.c_tax_key;
---Duplicidade tabela brerp.ad_fieldgroup
-drop index concurrently brerp.ad_fieldgroup_key;
---Duplicidade tabela brerp.gl_journalline
-drop index concurrently brerp.gl_journalline_key;
---Duplicidade tabela brerp.ad_note
-drop index concurrently brerp.ad_note_key;
---Duplicidade tabela brerp.m_productionline
-drop index concurrently brerp.m_productionline_key;
---Duplicidade tabela brerp.c_revenuerecognition
-drop index concurrently brerp.c_revenuerecognition_key;
-
--- script 2
 CREATE INDEX CONCURRENTLY idx_ad_userdef_field_ad_field_id ON  brerp.ad_userdef_field (ad_field_id);
 CREATE INDEX CONCURRENTLY idx_ad_userdef_field_ad_userdef_tab_id ON  brerp.ad_userdef_field (ad_userdef_tab_id);
 CREATE INDEX CONCURRENTLY idx_m_product_bom_m_productbom_id ON  brerp.m_product_bom (m_productbom_id);
@@ -361,7 +341,6 @@ CREATE INDEX CONCURRENTLY idx_ad_usermail_ad_user_id ON  brerp.ad_usermail (ad_u
 CREATE INDEX CONCURRENTLY idx_ad_changelog_ad_column_id ON  brerp.ad_changelog (ad_column_id);
 CREATE INDEX CONCURRENTLY idx_c_ordertax_c_tax_id ON  brerp.c_ordertax (c_tax_id);
 CREATE INDEX CONCURRENTLY idx_ad_pinstance_log_ad_table_id ON  brerp.ad_pinstance_log (ad_table_id);
-
 CREATE INDEX CONCURRENTLY idx_m_product_salesrep_id ON  brerp.m_product (salesrep_id);
 CREATE INDEX CONCURRENTLY idx_c_order_cof_c_custody_id ON  brerp.c_order (cof_c_custody_id);
 CREATE INDEX CONCURRENTLY idx_cof_titulo_cof_c_bankoccurrence_id ON  brerp.cof_titulo (cof_c_bankoccurrence_id);
@@ -371,7 +350,6 @@ CREATE INDEX CONCURRENTLY idx_ad_infocolumn_entitytype ON  brerp.ad_infocolumn (
 CREATE INDEX CONCURRENTLY idx_c_orderpayschedule_cof_c_custody_id ON  brerp.c_orderpayschedule (cof_c_custody_id);
 CREATE INDEX CONCURRENTLY idx_m_inoutline_user1_id ON  brerp.m_inoutline (user1_id);
 CREATE INDEX CONCURRENTLY idx_m_movementline_m_locatorto_id ON  brerp.m_movementline (m_locatorto_id);
-
 CREATE INDEX CONCURRENTLY idx_cof_c_controlcheck_createdby ON  brerp.cof_c_controlcheck (createdby);
 CREATE INDEX CONCURRENTLY idx_cof_c_controlcheck_updatedby ON  brerp.cof_c_controlcheck (updatedby);
 CREATE INDEX CONCURRENTLY idx_c_invoiceline_c_uom_id ON  brerp.c_invoiceline (c_uom_id);
@@ -426,167 +404,72 @@ CREATE INDEX CONCURRENTLY idx_ad_field_trl_ad_language ON  brerp.ad_field_trl (a
 CREATE INDEX CONCURRENTLY idx_ad_process_para_trl_ad_language ON  brerp.ad_process_para_trl (ad_language);
 CREATE INDEX CONCURRENTLY idx_ad_column_trl_ad_language ON  brerp.ad_column_trl (ad_language);
 CREATE INDEX CONCURRENTLY idx_cof_packinglist_cof_equipments_id ON  brerp.cof_packinglist (cof_equipments_id);
-
--- script 3
- drop index brerp.ad_element_clientorg;
- drop index brerp.ad_treenodebp_parent;
- drop index brerp.ad_treenodemm_parent;
- drop index brerp.ad_treenodepr_parent;
- drop index brerp.ad_wf_activity_who;
- drop index brerp.ad_wf_process_workflow;
- drop index brerp.c_acctschema_element_schema;
- drop index brerp.c_bpartner_name;
- drop index brerp.c_bpbankacct_bpartner;
- drop index brerp.c_bpbankacct_bpartner;
- drop index brerp.c_bplocation_updated;
- drop index brerp.c_commissionamt_comline;
- drop index brerp.c_commissionline_commission;
- drop index brerp.c_elementvalue_name;
- drop index brerp.c_order_processed;
- drop index brerp.c_payselline_paysel;
- drop index brerp.c_uom_x12;
- drop index brerp.m_costdetail_asi;
- drop index brerp.cof_lbr_docfiscal_lbr_nfestatus;
- drop index brerp.m_product_upc;
- drop index brerp.m_product_name;
- drop index brerp.m_productionline_prodplan;
- drop index brerp.t_cashflow_speed;
- drop index brerp.trec_matchcode;
-
--- script 4
 CREATE index concurrently idx_cof_titulo_c_invoicepayschedule_id_funcao ON brerp.cof_titulo USING btree (COALESCE(c_invoicepayschedule_id, (0)::numeric));
 CREATE INDEX concurrently idx_cof_titulo_c_invoicepayschedule_id_isvalid_funcao ON brerp.cof_titulo USING btree (COALESCE(c_invoicepayschedule_id, (0)::numeric), isvalid);
-create index concurrently idx_c_invoice_docstatus_ispayschedulevalid_issotrx on c_invoice (docstatus,ispayschedulevalid,issotrx);
-create index concurrently idx_cof_titulo_c_invoicepayschedule_id_isvalid on cof_titulo (c_invoicepayschedule_id,isvalid);
-create index concurrently idx_cof_titulo_c_invoicepayschedule_id_isvalid_cof_BillFoldType on cof_titulo (c_invoicepayschedule_id,isvalid,cof_BillFoldType);
-create index concurrently idx_c_invoicepayschedule_c_invoice_id_c_invoicepayschedule_id on  c_invoicepayschedule (c_invoice_id,c_invoicepayschedule_id);
-create index concurrently idx_ad_table_tablename on ad_table (tablename);
-create index concurrently idx_cof_c_controlcheck_datedoc on cof_c_controlcheck (datedoc);
-create index concurrently idx_cof_c_controlcheck_cof_datecleared on cof_c_controlcheck (cof_datecleared);
-create index concurrently idx_cof_c_controlcheck_chequeno on cof_c_controlcheck (chequeno);
-create index concurrently idx_ad_preference_ad_preference_uu on ad_preference (ad_preference_uu);
-create index concurrently idx_lbr_docfiscal_ide_cnf on lbr_docfiscal (ide_cnf);
-create index concurrently idx_lbr_docfiscal_processedon on lbr_docfiscal (processedon);
-create index concurrently idx_lbr_docfiscal_lbr_docfiscal_uu on lbr_docfiscal (lbr_docfiscal_uu);
-create index concurrently idx_lbr_docfiscal_lbr_infnfe_id on lbr_docfiscal (infnfe_id);
-create index concurrently idx_lbr_docfiscal_c_order_id on lbr_docfiscal (c_order_id);
-create index concurrently idx_lbr_docfiscal_documentno on lbr_docfiscal (documentno);
-create index concurrently idx_lbr_docfiscal_cobr_fat_nfat on lbr_docfiscal (cobr_fat_nfat);
-create index concurrently idx_lbr_docfiscal_ide_nnf on lbr_docfiscal (ide_nnf);
-create index concurrently idx_lbr_docfiscal_emit_bpartner_location_id on lbr_docfiscal (emit_bpartner_location_id);
-create index concurrently idx_lbr_docfiscal_emit_bpartner_id on lbr_docfiscal (emit_bpartner_id);
-create index concurrently idx_lbr_docfiscal_c_invoice_id on lbr_docfiscal (c_invoice_id);
-create index concurrently idx_lbr_docfiscal_emit_city_id on lbr_docfiscal (emit_city_id);
-create index concurrently idx_lbr_docfiscal_dest_city_id on lbr_docfiscal (dest_city_id);
-create index concurrently idx_lbr_dest_bpartner_id on lbr_docfiscal (dest_bpartner_id);
-create index concurrently idx_lbr_docfiscal_c_paymentterm_id on lbr_docfiscal (c_paymentterm_id);
-create index concurrently idx_lbr_docfiscal_m_pricelist_id on lbr_docfiscal (m_pricelist_id);
-create index concurrently idx_c_invoicepayschedule_duedate_funcao_trunc on c_invoicepayschedule (TRUNC (c_invoicepayschedule.DueDate)) ;
-create index concurrently idx_c_bpartner_c_bpartner_id on c_bpartner_location (c_bpartner_id) ;   
-create index concurrently idx_c_allocationhdr_isactive_c_allocationhdr_id on c_allocationhdr (IsActive,C_AllocationHdr_ID);                                                                                                                                                                                            
-create index concurrently idx_c_invoicepayschedule_coalesce_c_invoicepayschedule_id on c_invoicepayschedule (coalesce(c_invoicepayschedule_id,0));
-create index concurrently idx_C_Invoice_IsSOTrx_Processed_Updated_AD_Client_AD_Org_ID_C_Invoice_ID on C_Invoice (IsSOTrx,Processed,Updated,aD_Client_ID,AD_Org_ID,C_Invoice_ID,DocumentNo desc);                                                                                                                                                                                               
-create index idx_COF_Titulo_coalesce_c_invoicepayschedule_id on COF_Titulo (coalesce(C_InvoicePaySchedule_ID,0));                                                                                                                                                                                              
-
-
--- script 5
-ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_c_doctype FOREIGN KEY (c_doctype_id)
-      REFERENCES c_doctype (c_doctype_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_c_doctypetarget FOREIGN KEY (c_doctypetarget_id)
-      REFERENCES c_doctype (c_doctype_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;      
-ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_ad_org FOREIGN KEY (ad_org_id)
-      REFERENCES AD_org (ad_org_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
- ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_dest_bpartner FOREIGN KEY (dest_bpartner_id)
-      REFERENCES C_Bpartner (C_bpartner_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
- ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_dest_bpartner_location FOREIGN KEY (dest_bpartner_location_id)
-      REFERENCES C_Bpartner_Location (C_bpartner_location_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
- ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_emit_bpartner FOREIGN KEY (emit_bpartner_id)
-      REFERENCES C_BPartner (C_bpartner_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
- ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_emit_bpartner_location FOREIGN KEY (emit_bpartner_location_id)
-      REFERENCES C_Bpartner_Location (C_bpartner_location_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;                  
- ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_dest_country FOREIGN KEY (dest_country_id)
-      REFERENCES C_Country (C_country_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;      
-  ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_emit_country FOREIGN KEY (emit_country_id)
-      REFERENCES C_Country (C_country_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;     
- ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_emit_region FOREIGN KEY (emit_region_id)
-      REFERENCES C_Region (C_region_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;       
- ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_dest_region FOREIGN KEY (dest_region_id)
-      REFERENCES C_Region (C_region_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;  
- ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_emit_city FOREIGN KEY (emit_city_id)
-      REFERENCES C_City (C_city_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;  
-      
- ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_dest_city FOREIGN KEY (dest_city_id)
-      REFERENCES C_City (C_city_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;  
-  ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_c_invoice FOREIGN KEY (c_invoice_id)
-      REFERENCES C_Invoice (c_invoice_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-   ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_c_order FOREIGN KEY (c_order_id)
-      REFERENCES C_Order (c_order_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-    ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_m_pricelist FOREIGN KEY (m_pricelist_id)
-      REFERENCES M_PriceList (m_pricelist_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-   ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_c_paymentterm FOREIGN KEY (c_paymentterm_id)
-      REFERENCES c_paymentterm (c_paymentterm_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-  ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_org_location FOREIGN KEY (org_location_id)
-      REFERENCES C_Location (C_location_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;        
-  ALTER TABLE brerp.lbr_docfiscal add  CONSTRAINT fk_lbr_docfiscal_lbr_nfelot FOREIGN KEY (lbr_nfelot_id)
-      REFERENCES lbr_nfelot (lbr_nfelot_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;  
-
--- script 6
-CREATE INDEX CONCURRENTLY idx_c_invoice_ispaid_ad_client_docstatus_issotrx_DunningGrace on c_invoice (IsPaid,AD_Client_ID,DocStatus,IsSOTrx,DunningGrace);
-CREATE INDEX CONCURRENTLY idx_t_bankregister_dateacct        		on t_bankregister (dateacct);
-CREATE INDEX CONCURRENTLY idx_t_bankregister_ad_pinstance_id 	on t_bankregister (ad_pinstance_id);
-CREATE INDEX CONCURRENTLY idx_t_bankregister_c_bank_id 		 on t_bankregister (c_bank_id);
-CREATE INDEX CONCURRENTLY idx_t_bankregister_c_bpartner_id 		 on t_bankregister (c_bpartner_id);
-CREATE INDEX CONCURRENTLY idx_t_bankregister_documentno 		 on t_bankregister (documentno);
-CREATE INDEX CONCURRENTLY idx_t_cashflow_c_invoice_id 	 	     on t_cashflow (c_invoice_id);
-CREATE INDEX CONCURRENTLY idx_t_cashflow_c_bpartner_id 	 	     on t_cashflow (c_bpartner_id);
-CREATE INDEX CONCURRENTLY idx_t_cashflow_c_order_id 	 	     on t_cashflow (c_order_id);
-CREATE INDEX CONCURRENTLY idx_t_cashflow_ad_pinstance_id 	 	     on t_cashflow (ad_pinstance_id);
-CREATE INDEX CONCURRENTLY idx_t_cashflow_c_cashplanline_id 	 	     on t_cashflow (c_cashplanline_id);
-CREATE INDEX CONCURRENTLY idx_t_cashflow_c_elementvalue_id 	     on t_cashflow (c_elementvalue_id);
-CREATE INDEX CONCURRENTLY idx_t_cashflow_c_charge_id 	 	     on t_cashflow (c_charge_id);
-CREATE INDEX CONCURRENTLY idx_c_commissionamt_c_commissionline_id   on c_commissionamt (c_commissionline_id);
-CREATE INDEX CONCURRENTLY idx_c_commissionamt_c_commissionrun_id   on c_commissionamt (c_commissionrun_id);
-CREATE INDEX CONCURRENTLY idx_c_commissionamt_c_commissionline_id   on c_commissionamt (c_commissionline_id);
-CREATE INDEX CONCURRENTLY idx_c_commissionamt_c_commissionrun_id   on c_commissionamt (c_commissionrun_id);
-CREATE INDEX CONCURRENTLY idx_fact_acct_ad_org_ad_client_dateacct_funcao_PostingType on fact_acct (ad_org_id,ad_client_id,CAST(dateacct as DATE),PostingType);
-CREATE INDEX CONCURRENTLY idx_fact_acct_dateacct_funcao on fact_acct (CAST(dateacct as DATE));
-CREATE INDEX CONCURRENTLY idx_fact_acct_dateacct_funcao_PostingType on fact_acct (CAST(dateacct as DATE) ,PostingType);
-CREATE INDEX CONCURRENTLY idx_fact_acct_Record_ID_dateacct  on fact_acct (Record_ID,dateacct);
-CREATE INDEX CONCURRENTLY idx_fact_acct_concat_ad_table_id_Record_ID  on fact_acct (CAST(ad_table_id as TEXT) , CAST(Record_ID as TEXT));
-CREATE INDEX CONCURRENTLY idx_C_ElementValue_value on C_ElementValue (value);
-CREATE INDEX CONCURRENTLY idx_fact_acct_concat_funcao_ad_table_id_Record_ID  on fact_acct ( (CAST(AD_Table_ID as TEXT) || '' || CAST(Record_ID as TEXT)));
- create index concurrently idx_t_reconciliation_ad_pinstance on t_reconciliation (ad_pinstance_id);
- create index concurrently idx_t_reconciliation_fact_acct on t_reconciliation (fact_acct_id);
-  create index concurrently idx_c_bankstatement_processedon on  c_bankstatement (processedon);
-create index CONCURRENTLY idx_ad_session_websession on ad_session (websession);
-create index CONCURRENTLY idx_ad_session_remote_addr on ad_session (remote_addr);
-create index CONCURRENTLY idx_ad_session_remote_host on ad_session (remote_host); 
- 
-create index concurrently idx_ad_treenodemm_parent_id on  ad_treenodemm (parent_id);
-create index concurrently idx_ad_treenodemm_seqno on  ad_treenodemm (seqno);
-create index concurrently idx_ad_treenodemm_node on  ad_treenodemm (node_id);
-
-
--- script 7
+create index concurrently idx_c_invoice_docstatus_ispayschedulevalid_issotrx on brerp.c_invoice (docstatus,ispayschedulevalid,issotrx);
+create index concurrently idx_cof_titulo_c_invoicepayschedule_id_isvalid on brerp.cof_titulo (c_invoicepayschedule_id,isvalid);
+create index concurrently idx_cof_titulo_c_invoicepayschedule_id_isvalid_cof_BillFoldType on brerp.cof_titulo (c_invoicepayschedule_id,isvalid,cof_BillFoldType);
+create index concurrently idx_c_invoicepayschedule_c_invoice_id_c_invoicepayschedule_id on  brerp.c_invoicepayschedule (c_invoice_id,c_invoicepayschedule_id);
+create index concurrently idx_ad_table_tablename on brerp.ad_table (tablename);
+create index concurrently idx_cof_c_controlcheck_datedoc on brerp.cof_c_controlcheck (datedoc);
+create index concurrently idx_cof_c_controlcheck_cof_datecleared on brerp.cof_c_controlcheck (cof_datecleared);
+create index concurrently idx_cof_c_controlcheck_chequeno on brerp.cof_c_controlcheck (chequeno);
+create index concurrently idx_ad_preference_ad_preference_uu on brerp.ad_preference (ad_preference_uu);
+create index concurrently idx_lbr_docfiscal_ide_cnf on brerp.lbr_docfiscal (ide_cnf);
+create index concurrently idx_lbr_docfiscal_processedon on brerp.lbr_docfiscal (processedon);
+create index concurrently idx_lbr_docfiscal_lbr_docfiscal_uu on brerp.lbr_docfiscal (lbr_docfiscal_uu);
+create index concurrently idx_lbr_docfiscal_lbr_infnfe_id on brerp.lbr_docfiscal (infnfe_id);
+create index concurrently idx_lbr_docfiscal_c_order_id on brerp.lbr_docfiscal (c_order_id);
+create index concurrently idx_lbr_docfiscal_documentno on brerp.lbr_docfiscal (documentno);
+create index concurrently idx_lbr_docfiscal_cobr_fat_nfat on brerp.lbr_docfiscal (cobr_fat_nfat);
+create index concurrently idx_lbr_docfiscal_ide_nnf on brerp.lbr_docfiscal (ide_nnf);
+create index concurrently idx_lbr_docfiscal_emit_bpartner_location_id on brerp.lbr_docfiscal (emit_bpartner_location_id);
+create index concurrently idx_lbr_docfiscal_emit_bpartner_id on brerp.lbr_docfiscal (emit_bpartner_id);
+create index concurrently idx_lbr_docfiscal_c_invoice_id on brerp.lbr_docfiscal (c_invoice_id);
+create index concurrently idx_lbr_docfiscal_emit_city_id on brerp.lbr_docfiscal (emit_city_id);
+create index concurrently idx_lbr_docfiscal_dest_city_id on brerp.lbr_docfiscal (dest_city_id);
+create index concurrently idx_lbr_dest_bpartner_id on brerp.lbr_docfiscal (dest_bpartner_id);
+create index concurrently idx_lbr_docfiscal_c_paymentterm_id on brerp.lbr_docfiscal (c_paymentterm_id);
+create index concurrently idx_lbr_docfiscal_m_pricelist_id on brerp.lbr_docfiscal (m_pricelist_id);
+create index concurrently idx_c_invoicepayschedule_duedate_funcao_trunc on brerp.c_invoicepayschedule (TRUNC (c_invoicepayschedule.DueDate)) ;
+create index concurrently idx_c_bpartner_c_bpartner_id on brerp.c_bpartner_location (c_bpartner_id) ;   
+create index concurrently idx_c_allocationhdr_isactive_c_allocationhdr_id on brerp.c_allocationhdr (IsActive,C_AllocationHdr_ID);                                                                                                                                                                                            
+create index concurrently idx_c_invoicepayschedule_coalesce_c_invoicepayschedule_id on brerp.c_invoicepayschedule (coalesce(c_invoicepayschedule_id,0));
+create index concurrently idx_C_Invoice_IsSOTrx_Processed_Updated_AD_Client_AD_Org_ID_C_Invoice_ID on brerp.C_Invoice (IsSOTrx,Processed,Updated,aD_Client_ID,AD_Org_ID,C_Invoice_ID,DocumentNo desc);                                                                                                                                                                                               
+create index concurrently idx_COF_Titulo_coalesce_c_invoicepayschedule_id on brerp.OF_Titulo (coalesce(C_InvoicePaySchedule_ID,0));                                                                                                                                                                                              
+CREATE INDEX CONCURRENTLY idx_c_invoice_ispaid_ad_client_docstatus_issotrx_DunningGrace on brerp.c_invoice (IsPaid,AD_Client_ID,DocStatus,IsSOTrx,DunningGrace);
+CREATE INDEX CONCURRENTLY idx_t_bankregister_dateacct        		on brerp.t_bankregister (dateacct);
+CREATE INDEX CONCURRENTLY idx_t_bankregister_ad_pinstance_id 	on brerp.t_bankregister (ad_pinstance_id);
+CREATE INDEX CONCURRENTLY idx_t_bankregister_c_bank_id 		 on brerp.t_bankregister (c_bank_id);
+CREATE INDEX CONCURRENTLY idx_t_bankregister_c_bpartner_id 		 on brerp.t_bankregister (c_bpartner_id);
+CREATE INDEX CONCURRENTLY idx_t_bankregister_documentno 		 on brerp.t_bankregister (documentno);
+CREATE INDEX CONCURRENTLY idx_t_cashflow_c_invoice_id 	 	     on brerp.t_cashflow (c_invoice_id);
+CREATE INDEX CONCURRENTLY idx_t_cashflow_c_bpartner_id 	 	     on brerp.t_cashflow (c_bpartner_id);
+CREATE INDEX CONCURRENTLY idx_t_cashflow_c_order_id 	 	     on brerp.t_cashflow (c_order_id);
+CREATE INDEX CONCURRENTLY idx_t_cashflow_ad_pinstance_id 	 	     on brerp.t_cashflow (ad_pinstance_id);
+CREATE INDEX CONCURRENTLY idx_t_cashflow_c_cashplanline_id 	 	     on brerp.t_cashflow (c_cashplanline_id);
+CREATE INDEX CONCURRENTLY idx_t_cashflow_c_elementvalue_id 	     on brerp.t_cashflow (c_elementvalue_id);
+CREATE INDEX CONCURRENTLY idx_t_cashflow_c_charge_id 	 	     on brerp.t_cashflow (c_charge_id);
+CREATE INDEX CONCURRENTLY idx_c_commissionamt_c_commissionline_id   on brerp.c_commissionamt (c_commissionline_id);
+CREATE INDEX CONCURRENTLY idx_c_commissionamt_c_commissionrun_id   on brerp.c_commissionamt (c_commissionrun_id);
+CREATE INDEX CONCURRENTLY idx_c_commissionamt_c_commissionline_id   on brerp.c_commissionamt (c_commissionline_id);
+CREATE INDEX CONCURRENTLY idx_c_commissionamt_c_commissionrun_id   on brerp.c_commissionamt (c_commissionrun_id);
+CREATE INDEX CONCURRENTLY idx_fact_acct_ad_org_ad_client_dateacct_funcao_PostingType on brerp.fact_acct (ad_org_id,ad_client_id,CAST(dateacct as DATE),PostingType);
+CREATE INDEX CONCURRENTLY idx_fact_acct_dateacct_funcao on brerp.fact_acct (CAST(dateacct as DATE));
+CREATE INDEX CONCURRENTLY idx_fact_acct_dateacct_funcao_PostingType on brerp.fact_acct (CAST(dateacct as DATE) ,PostingType);
+CREATE INDEX CONCURRENTLY idx_fact_acct_Record_ID_dateacct  on brerp.fact_acct (Record_ID,dateacct);
+CREATE INDEX CONCURRENTLY idx_fact_acct_concat_ad_table_id_Record_ID  on brerp.fact_acct (CAST(ad_table_id as TEXT) , CAST(Record_ID as TEXT));
+CREATE INDEX CONCURRENTLY idx_C_ElementValue_value on brerp.C_ElementValue (value);
+CREATE INDEX CONCURRENTLY idx_fact_acct_concat_funcao_ad_table_id_Record_ID  on brerp.fact_acct ( (CAST(AD_Table_ID as TEXT) || '' || CAST(Record_ID as TEXT)));
+create index concurrently idx_t_reconciliation_ad_pinstance on brerp.t_reconciliation (ad_pinstance_id);
+create index concurrently idx_t_reconciliation_fact_acct on brerp.t_reconciliation (fact_acct_id);
+create index concurrently idx_c_bankstatement_processedon on  brerp.c_bankstatement (processedon);
+create index CONCURRENTLY idx_ad_session_websession on brerp.ad_session (websession);
+create index CONCURRENTLY idx_ad_session_remote_addr on brerp.ad_session (remote_addr);
+create index CONCURRENTLY idx_ad_session_remote_host on brerp.ad_session (remote_host); 
+create index concurrently idx_ad_treenodemm_parent_id on  brerp.ad_treenodemm (parent_id);
+create index concurrently idx_ad_treenodemm_seqno on  brerp.ad_treenodemm (seqno);
+create index concurrently idx_ad_treenodemm_node on  brerp.ad_treenodemm (node_id);
 CREATE INDEX CONCURRENTLY idx_ad_wf_activity_ecord_processed_ad_wf_activity ON brerp.ad_wf_activity (record_id,AD_Table_ID,processed);
 create index concurrently idx_c_invoice_createdby_AD_Org_ad_client   	  on brerp.c_invoice (createdby,AD_Org_ID,ad_client_id);
 create index concurrently idx_c_payment_createdby_AD_Org_ad_client   	  on brerp.c_payment (createdby,AD_Org_ID,ad_client_id);
@@ -615,28 +498,4 @@ create index idx_lbr_ide_dhEmi_AD_Org_ID_AD_Client_ID_de_tpNF_ide_finnfe  on bre
 create index idx_cof_label_valeu on brerp.cof_label (value);
 create index idx_c_invoice_user2_id on brerp.c_invoice (user2_id);
 create index idx_m_productionline_m_product_id_movementqty_processed on brerp.M_ProductionLine (M_Product_ID,MovementQty,Processed);
-create index idx_z_manifestoline_z_manifesto_id on brerp.z_manifestoline (z_manifesto_ID);	
-
--- mht daqui pra baixo tem que ser analisada a query
-SELECT pg_size_pretty(SUM(pg_relation_size(idx))::BIGINT) AS SIZE,
-       (array_agg(idx))[1] AS idx1, (array_agg(idx))[2] AS idx2,
-       (array_agg(idx))[3] AS idx3, (array_agg(idx))[4] AS idx4
-FROM (
-    SELECT indexrelid::regclass AS idx, (indrelid::text ||E'\n'|| indclass::text ||E'\n'|| indkey::text ||E'\n'||
-                                         COALESCE(indexprs::text,'')||E'\n' || COALESCE(indpred::text,'')) AS KEY
-    FROM pg_index) sub
-GROUP BY KEY HAVING COUNT(*)>1
-ORDER BY SUM(pg_relation_size(idx)) DESC;
-
-
--- eleger algum para excluir 
-drop index m_costdetail_il;
-drop index idx_lbr_docfiscal_line_m_inoutline_id;
-drop index udi_inoutline_docfiscalline;
-drop index c_bplocation_bpartner;
-drop index idx_ad_preference_ad_preference_uu;
-drop index ad_table_name;
-drop index c_commissionamt_run;
-drop index c_currency_c_currency_id_idx;
-drop index idx_lbr_docfiscal_lbr_docfiscal_uu;
-drop index idx_m_productionline_m_product_id;
+create index idx_z_manifestoline_z_manifesto_id on brerp.z_manifestoline (z_manifesto_ID);
