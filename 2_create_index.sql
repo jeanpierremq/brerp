@@ -499,3 +499,14 @@ create index idx_cof_label_valeu on brerp.cof_label (value);
 create index idx_c_invoice_user2_id on brerp.c_invoice (user2_id);
 create index idx_m_productionline_m_product_id_movementqty_processed on brerp.M_ProductionLine (M_Product_ID,MovementQty,Processed);
 create index idx_z_manifestoline_z_manifesto_id on brerp.z_manifestoline (z_manifesto_ID);
+
+create index idx_cob_contrato_cob_pndevedor_ID     on brerp.COB_Contrato (COB_PNDevedor_ID);
+create index idx_cob_contratolinha_cob_contrato_id on brerp.cob_contratolinha (cob_contrato_id);
+create index idx_cob_historicocontato_cob_cobranca_id on brerp.cob_historicocontato (cob_cobranca_id);
+create index idx_cob_encargo_cob_contratolinha_id     on brerp.cob_encargo (cob_contratolinha_id);
+create index idx_cob_encargo_cob_cob_valorcalculado   on brerp.cob_encargo (cob_valorcalculado);
+create index idx_cob_encargo_cob_cob_cobrancalinha_id on brerp.cob_encargo (cob_cobrancalinha_id);
+create index idx_cob_cobranca_cob_pndevedor_id           on brerp.cob_cobranca (cob_pndevedor_id);
+create index idx_cob_acordolinha_cob_acordo_id          on brerp.cob_acordolinha (cob_acordo_id);
+create index idx_cob_acordolinha_cob_cobranca_id      on brerp.cob_acordolinha (cob_cobranca_id);
+create index idx_cob_acordolinha_cob_datapagamento      on brerp.cob_acordolinha (cob_datapagamento);	
