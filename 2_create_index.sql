@@ -500,7 +500,8 @@ create index idx_c_invoice_user2_id on brerp.c_invoice (user2_id);
 create index idx_m_productionline_m_product_id_movementqty_processed on brerp.M_ProductionLine (M_Product_ID,MovementQty,Processed);
 create index idx_z_manifestoline_z_manifesto_id on brerp.z_manifestoline (z_manifesto_ID);
 
-create index idx_cob_contrato_cob_pndevedor_ID     on brerp.COB_Contrato (COB_PNDevedor_ID);
+create index idx_cob_contrato_cob_pndevedor_ID      on brerp.COB_Contrato (COB_PNDevedor_ID);
+create index idx_cob_contrato_cob_cob_pncredor_id   on brerp.COB_Contrato (cob_pncredor_id);
 create index idx_cob_contratolinha_cob_contrato_id on brerp.cob_contratolinha (cob_contrato_id);
 create index idx_cob_historicocontato_cob_cobranca_id on brerp.cob_historicocontato (cob_cobranca_id);
 create index idx_cob_encargo_cob_contratolinha_id     on brerp.cob_encargo (cob_contratolinha_id);
